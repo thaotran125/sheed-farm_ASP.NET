@@ -1,0 +1,11 @@
+﻿@model CayGiong.Models.Category
+
+@*<option>--select Category child--</option>*@
+
+@if (ViewBag.Category != null)
+{
+    foreach (var item in ViewBag.Category)
+    {
+        <option value="@item.id_Cate">@item.name_Cate</option>
+    }
+}

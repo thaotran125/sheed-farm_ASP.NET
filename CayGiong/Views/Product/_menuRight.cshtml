@@ -1,0 +1,65 @@
+﻿@using CayGiong.Dao;
+@{ 
+    DaoCategory dao = new DaoCategory();
+}
+<div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
+    <div class="product-categori">
+        <div class="search-product">
+            <form action="#">
+                <input class="form-control" placeholder="Search here..." type="text">
+                <button type="submit"> <i class="fa fa-search"></i> </button>
+            </form>
+        </div>
+        <div class="filter-sidebar-left">
+            <div class="title-left">
+                <h3>Categories</h3>
+            </div>
+            <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
+                @{ int i = 0;
+                    var name = "";}
+                @foreach (var item in ViewBag.listParent)
+                {
+                    i = i + 1; name = "sub-men" + i;
+
+                    <div class="list-group-collapse sub-men">
+                        <a href="/Product/ProductParent?idParent=@item.id_Cate">
+                            @item.name_Cate
+                        </a>
+                        @if(dao.CountCateGroup(item.id_Cate)!=0)
+                        {
+                            <button class="show-submenu" aria-expanded="true" data-toggle="collapse" data-target="#@name" aria-controls="@name"><i class="fa fa-angle-down" aria-hidden="true"></i></button>
+                        }
+                        <div class="collapse show" id="@name" data-parent="#list-group-men">
+                            @foreach (var sub in ViewBag.listGroup)
+                            {
+                                if (item.id_Cate == sub.Group_id)
+                                {
+                                    <div class="list-group">
+                                        <a href="/Product/ProductChild?idChild=@sub.id_Cate" class="list-group-item list-group-item-action active">@sub.name_Cate </a>
+                                    </div>
+                                }
+
+                            }
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="filter-price-left">
+            <div class="title-left">
+                <h3>Price</h3>
+            </div>
+            <div class="price-box-slider">
+                <div id="slider-range"></div>
+                <p>
+                    <input type="text" id="amount" readonly style="border:0; color:#fbb714; font-weight:bold;">
+                    <button class="btn hvr-hover" type="submit">Filter</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("div.inbox").collapse({ toggle: false }).collapse('hide');
+</script>

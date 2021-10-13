@@ -1,0 +1,10 @@
+﻿@model CayGiong.Models.Category
+<!-- Modal del -->
+
+<h3 class="modal-title ml-5">Delete Category</h3>
+<hr />
+    <div class="ml-3">Bạn muốn xóa loại @Model.name_Cate</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+    <a href="/Admin/Category/Delete?id=@Model.id_Cate" class="btn btn-primary" id="delCate" >Delete</a>
+</div>

@@ -1,0 +1,117 @@
+﻿@model PagedList.IPagedList<CayGiong.Models.Product>
+@using PagedList.Mvc;
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section header{
+    List Product
+}
+<div class="card-body row">
+    @if (ViewBag.Successmsg != null)
+    {
+        <div class="alert alert-success" id="almsg" role="alert">
+            @ViewBag.Successmsg
+        </div>
+    }
+    @if (ViewBag.Errormsg != null)
+    {
+        <div class="alert alert-danger" id="almsg" role="alert">
+            @ViewBag.Errormsg
+        </div>
+    }
+</div>
+<p>
+    <a href="/Admin/Product/Insert" class="btn btn-primary"><i class="fa fa-plus mr-3" style="color:#fff"></i><span>Create New</span></a>
+
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Stt")
+        </th>
+        <th>
+            @Html.Label("name")
+        </th>
+        <th>
+            @Html.Label("image")
+        </th>
+        <th>
+            @Html.Label("category")
+        </th>
+        <th>
+            @Html.Label("price")
+        </th>
+        <th>
+            @Html.Label("status")
+        </th>
+        <th></th>
+    </tr>
+    @{int i = 0; }
+    @foreach (var item in Model)
+    {
+       i++;
+        <tr>
+            <td>
+                <span>@i</span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name_product)
+            </td>
+            <td>
+                <img class="img-fluid" style="width:70px" src="~/Images/Product/@item.img_Prodcut" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.name_Cate)
+            </td>
+            <td>
+                @string.Format("{0:n0}",item.price)
+            </td>
+            <td>
+                @if (item.status == 1)
+                {
+                    @Html.Label("Enabled")
+                }
+                @if(item.status==0) {
+                    @Html.Label("Disabled")
+                }
+            </td>
+            <td>
+                <div>
+                    <a href="/Admin/Product/Edit?id=@item.id_Product" title="Ediit" class="btn btn-primary"><i class="fa fa-edit" style="color:#fff"></i></a>
+                    <a href="/Admin/Product/Detail?id=@item.id_Product" title="View Detail" class="btn btn-success"><i class="fa fa-eye" style="color:#fff"></i></a>
+                  
+                   @* <button class="OpenEdit btn btn-success" dataid="@item.id_Product" dataPage="@Model.PageNumber" ><i class="fa fa-edit" style="color:#fff"></i></button>*@
+                </div>
+                <div>
+                    <a href="/Admin/Product/Delete?id=@item.id_Product" title="Delete" class="btn btn-danger csscenter"><i class="fa fa-trash" style="color:#fff"></i></a>
+                </div>
+
+            </td>
+        </tr>
+
+    }
+            
+</table>
+@using (Html.BeginForm("Index", "Product", FormMethod.Get, new { id = "formP" }))
+{
+<div>
+    Trang @(Model.PageCount< Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        <span class="ml-5 mr-2">Pagesize</span>
+        @Html.DropDownList("pageSize")
+</div>
+    <div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page, PageSize = Model.PageSize }))
+    </div>
+
+}
+
+@{ 
+    TempData["page"] = Model.PageNumber;
+    TempData["pagesize"] = Model.PageSize;
+}
+
+
+
+

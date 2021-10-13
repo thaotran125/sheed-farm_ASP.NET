@@ -1,0 +1,123 @@
+﻿@model CayGiong.ViewModel.ProductViewModel
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Insert Product
+}
+<div class="card-body row">
+    @if (ViewBag.Successmsg != null)
+    {
+        <div class="alert alert-success" id="almsg" role="alert">
+            @ViewBag.Successmsg
+        </div>
+    }
+    @if (ViewBag.Errormsg != null)
+    {
+        <div class="alert alert-danger" id="almsg" role="alert">
+            @ViewBag.Errormsg
+        </div>
+    }
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>ProductViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.group_name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Group_id, new SelectList(ViewBag.CateParent, "id_Cate", "name_Cate"), "--select category parent--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Group_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name_cate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.id_cate, new SelectList(ViewBag.Category, "id_Cate", "name_Cate"), "--select category child--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_cate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.url, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.url, new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.url, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.img, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label for="myfile">Select a file:</label>
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.img, new { htmlAttributes = new { @class = "form-control" } })*@
+                <input type="file" id="img" name="img"><br><br>
+                <img id="img_demo" style="width:100px" />
+                @Html.ValidationMessageFor(model => model.img, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div>
+            @Html.TextAreaFor(x => x.descript)
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.price,  new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script>
+    $('#descript').summernote({
+        inlineMode: false,
+        tabsize: 2,
+        height: 210,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    });
+</script>
+

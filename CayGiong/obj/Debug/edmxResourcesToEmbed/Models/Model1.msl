@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB_SEED_FARMModelStoreContainer" CdmEntityContainer="DB_SEED_FARMEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="DB_SEED_FARMModel.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="level" ColumnName="level" />
+          <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+          <ScalarProperty Name="remember_token" ColumnName="remember_token" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="DB_SEED_FARMModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="id_Cate" ColumnName="id_Cate" />
+          <ScalarProperty Name="name_Cate" ColumnName="name_Cate" />
+          <ScalarProperty Name="url_Cate" ColumnName="url_Cate" />
+          <ScalarProperty Name="img_Cate" ColumnName="img_Cate" />
+          <ScalarProperty Name="Group_id" ColumnName="Group_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="DB_SEED_FARMModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id_card" ColumnName="id_card" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="working_day" ColumnName="working_day" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order_detal">
+      <EntityTypeMapping TypeName="DB_SEED_FARMModel.Order_detal">
+        <MappingFragment StoreEntitySet="Order_detal">
+          <ScalarProperty Name="id_Order" ColumnName="id_Order" />
+          <ScalarProperty Name="id_Product" ColumnName="id_Product" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderProducts">
+      <EntityTypeMapping TypeName="DB_SEED_FARMModel.OrderProduct">
+        <MappingFragment StoreEntitySet="OrderProduct">
+          <ScalarProperty Name="id_Order" ColumnName="id_Order" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="id_Status" ColumnName="id_Status" />
+          <ScalarProperty Name="order_day" ColumnName="order_day" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="DB_SEED_FARMModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="descript" ColumnName="descript" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="id_Product" ColumnName="id_Product" />
+          <ScalarProperty Name="name_product" ColumnName="name_product" />
+          <ScalarProperty Name="url_Product" ColumnName="url_Product" />
+          <ScalarProperty Name="img_Prodcut" ColumnName="img_Prodcut" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="id_Cate" ColumnName="id_Cate" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status_Order">
+      <EntityTypeMapping TypeName="DB_SEED_FARMModel.Status_Order">
+        <MappingFragment StoreEntitySet="Status_Order">
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="id_Status" ColumnName="id_Status" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="getCateParent" FunctionName="DB_SEED_FARMModel.Store.getCateParent">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB_SEED_FARMModel.getCateParent_Result">
+          <ScalarProperty Name="id_Cate" ColumnName="id_Cate" />
+          <ScalarProperty Name="name_Cate" ColumnName="name_Cate" />
+          <ScalarProperty Name="url_Cate" ColumnName="url_Cate" />
+          <ScalarProperty Name="img_Cate" ColumnName="img_Cate" />
+          <ScalarProperty Name="Group_id" ColumnName="Group_id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="PR_Login_user" FunctionName="DB_SEED_FARMModel.Store.PR_Login_user">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB_SEED_FARMModel.PR_Login_user_Result">
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="level" ColumnName="level" />
+          <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+          <ScalarProperty Name="remember_token" ColumnName="remember_token" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="PRgetIdParent" FunctionName="DB_SEED_FARMModel.Store.PRgetIdParent">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB_SEED_FARMModel.PRgetIdParent_Result">
+          <ScalarProperty Name="Group_id" ColumnName="Group_id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="pr_RpTurnover" FunctionName="DB_SEED_FARMModel.Store.pr_RpTurnover">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB_SEED_FARMModel.pr_RpTurnover_Result">
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="name_Cate" ColumnName="name_Cate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="pr_RpTurnoverWithDay" FunctionName="DB_SEED_FARMModel.Store.pr_RpTurnoverWithDay">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB_SEED_FARMModel.pr_RpTurnoverWithDay_Result">
+          <ScalarProperty Name="sumtotal" ColumnName="sumtotal" />
+          <ScalarProperty Name="day" ColumnName="day" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CheckDel" FunctionName="DB_SEED_FARMModel.Store.CheckDel">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB_SEED_FARMModel.CheckDel_Result">
+          <ScalarProperty Name="id_Product" ColumnName="id_Product" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="pr_RpTurnoverWithMonth" FunctionName="DB_SEED_FARMModel.Store.pr_RpTurnoverWithMonth">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB_SEED_FARMModel.pr_RpTurnoverWithMonth_Result">
+          <ScalarProperty Name="sumtotal" ColumnName="sumtotal" />
+          <ScalarProperty Name="month" ColumnName="month" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

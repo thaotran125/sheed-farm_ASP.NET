@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_SEED_FARMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="userName" />
+    </Key>
+    <Property Name="userName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="level" Type="Int32" Nullable="false" />
+    <Property Name="id_employee" Type="Int32" Nullable="false" />
+    <Property Name="remember_token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.fk_kh_acc" FromRole="Account" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="id_Cate" />
+    </Key>
+    <Property Name="id_Cate" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name_Cate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="url_Cate" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="img_Cate" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Group_id" Type="Int32" />
+    <NavigationProperty Name="Products" Relationship="Self.fk_sp_loai" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="id_employee" />
+    </Key>
+    <Property Name="id_employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_card" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="working_day" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Accounts" Relationship="Self.fk_kh_acc" FromRole="Employee" ToRole="Account" />
+  </EntityType>
+  <EntityType Name="Order_detal">
+    <Key>
+      <PropertyRef Name="id_Order" />
+      <PropertyRef Name="id_Product" />
+    </Key>
+    <Property Name="id_Order" Type="Int32" Nullable="false" />
+    <Property Name="id_Product" Type="Int32" Nullable="false" />
+    <Property Name="quantity" Type="Int32" Nullable="false" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="OrderProduct" Relationship="Self.fk_ct_dh" FromRole="Order_detal" ToRole="OrderProduct" />
+    <NavigationProperty Name="Product" Relationship="Self.fk_ct_sp" FromRole="Order_detal" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="OrderProduct">
+    <Key>
+      <PropertyRef Name="id_Order" />
+    </Key>
+    <Property Name="id_Order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="id_Status" Type="Int32" />
+    <Property Name="order_day" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Order_detal" Relationship="Self.fk_ct_dh" FromRole="OrderProduct" ToRole="Order_detal" />
+    <NavigationProperty Name="Status_Order" Relationship="Self.fk_dh_tt" FromRole="OrderProduct" ToRole="Status_Order" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="id_Product" />
+    </Key>
+    <Property Name="id_Product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name_product" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="url_Product" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="img_Prodcut" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_Cate" Type="Int32" Nullable="false" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Category" Relationship="Self.fk_sp_loai" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Order_detal" Relationship="Self.fk_ct_sp" FromRole="Product" ToRole="Order_detal" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="descript" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Status_Order">
+    <Key>
+      <PropertyRef Name="id_Status" />
+    </Key>
+    <Property Name="id_Status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="OrderProducts" Relationship="Self.fk_dh_tt" FromRole="Status_Order" ToRole="OrderProduct" />
+    <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="fk_kh_acc">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="id_employee" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="id_employee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_sp_loai">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="id_Cate" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="id_Cate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_ct_dh">
+    <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="1" />
+    <End Role="Order_detal" Type="Self.Order_detal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderProduct">
+        <PropertyRef Name="id_Order" />
+      </Principal>
+      <Dependent Role="Order_detal">
+        <PropertyRef Name="id_Order" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_ct_sp">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Order_detal" Type="Self.Order_detal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id_Product" />
+      </Principal>
+      <Dependent Role="Order_detal">
+        <PropertyRef Name="id_Product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_dh_tt">
+    <End Role="Status_Order" Type="Self.Status_Order" Multiplicity="0..1" />
+    <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status_Order">
+        <PropertyRef Name="id_Status" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="id_Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB_SEED_FARMEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Order_detal" EntityType="Self.Order_detal" />
+    <EntitySet Name="OrderProducts" EntityType="Self.OrderProduct" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Status_Order" EntityType="Self.Status_Order" />
+    <AssociationSet Name="fk_kh_acc" Association="Self.fk_kh_acc">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_sp_loai" Association="Self.fk_sp_loai">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="fk_ct_dh" Association="Self.fk_ct_dh">
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+      <End Role="Order_detal" EntitySet="Order_detal" />
+    </AssociationSet>
+    <AssociationSet Name="fk_ct_sp" Association="Self.fk_ct_sp">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Order_detal" EntitySet="Order_detal" />
+    </AssociationSet>
+    <AssociationSet Name="fk_dh_tt" Association="Self.fk_dh_tt">
+      <End Role="Status_Order" EntitySet="Status_Order" />
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <FunctionImport Name="getCateParent" ReturnType="Collection(DB_SEED_FARMModel.getCateParent_Result)" />
+    <FunctionImport Name="PR_Login_user" ReturnType="Collection(DB_SEED_FARMModel.PR_Login_user_Result)">
+      <Parameter Name="useName" Mode="In" Type="String" />
+      <Parameter Name="pass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PRgetIdParent" ReturnType="Collection(DB_SEED_FARMModel.PRgetIdParent_Result)">
+      <Parameter Name="idCate" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="pr_RpTurnover" ReturnType="Collection(DB_SEED_FARMModel.pr_RpTurnover_Result)" />
+    <FunctionImport Name="pr_RpTurnoverWithDay" ReturnType="Collection(DB_SEED_FARMModel.pr_RpTurnoverWithDay_Result)" />
+    <FunctionImport Name="CheckDel" ReturnType="Collection(DB_SEED_FARMModel.CheckDel_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="pr_RpTurnoverWithMonth" ReturnType="Collection(DB_SEED_FARMModel.pr_RpTurnoverWithMonth_Result)" />
+  </EntityContainer>
+  <ComplexType Name="getCateParent_Result">
+    <Property Type="Int32" Name="id_Cate" Nullable="false" />
+    <Property Type="String" Name="name_Cate" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="url_Cate" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="img_Cate" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="Group_id" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="PR_Login_user_Result">
+    <Property Type="String" Name="userName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="password" Nullable="false" MaxLength="150" />
+    <Property Type="Int32" Name="level" Nullable="false" />
+    <Property Type="Int32" Name="id_employee" Nullable="false" />
+    <Property Type="String" Name="remember_token" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="PRgetIdParent_Result">
+    <Property Type="Int32" Name="Group_id" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="pr_RpTurnover_Result">
+    <Property Type="Decimal" Name="total" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="String" Name="name_Cate" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="pr_RpTurnoverWithDay_Result">
+    <Property Type="Decimal" Name="sumtotal" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Int32" Name="day" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="CheckDel_Result">
+    <Property Type="Int32" Name="id_Product" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="pr_RpTurnoverWithMonth_Result">
+    <Property Type="Decimal" Name="sumtotal" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Int32" Name="month" Nullable="true" />
+  </ComplexType>
+</Schema>

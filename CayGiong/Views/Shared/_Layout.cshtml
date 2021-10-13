@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="~/Assets/Client/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="~/Assets/Client/images/apple-touch-icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="~/Assets/Client/css/bootstrap-grid.min.css" rel="stylesheet" />
+    <!-- Site CSS -->
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+    <link href="~/Assets/Client/css/carousel-ticker.css" rel="stylesheet" />
+    <link href="~/Assets/Client/css/style.css" rel="stylesheet" />
+    <link href="~/Assets/Client/fonts/themify-icons/themify-icons.css" rel="stylesheet" />
+    <!-- Responsive CSS -->
+    <link href="~/Assets/Client/css/responsive.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="~/Assets/Client/css/custom.css" rel="stylesheet" />
+    <title>Seed Farm</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <!-- End Main Top -->
+    <!-- Start Main Top -->
+    <header class="main-header">
+        <!-- Start Navigation -->
+
+        @{Html.RenderAction("Menu", "Home");}
+
+        <!-- End Navigation -->
+    </header>
+    <!-- End Main Top -->
+    <!-- Start Top Search -->
+    <div class="top-search">
+        <div class="container">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" class="form-control" placeholder="Search">
+                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+    <!-- End Top Search -->
+    @*  <div class="container body-content">*@
+    @RenderBody()
+    <hr />
+    <!-- Start Footer  -->
+    @RenderPage("~/Views/Shared/_Footer.cshtml")
+    <!-- End Footer  -->
+    <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+    @*</div>*@
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+    <!-- ALL PLUGINS -->
+    <script src="~/Assets/Client/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script src="~/Assets/Client/js/jquery.superslides.min.js"></script>
+    <script src="~/Assets/Client/js/bootstrap-select.js"></script>
+    <script src="~/Assets/Client/js/inewsticker.js"></script>
+    <script src="~/Assets/Client/js/bootsnav.js"></script>
+    <script src="~/Assets/Client/js/images-loded.min.js"></script>
+    <script src="~/Assets/Client/js/isotope.min.js"></script>
+    <script src="~/Assets/Client/js/owl.carousel.min.js"></script>
+    <script src="~/Assets/Client/js/baguetteBox.min.js"></script>
+    <script src="~/Assets/Client/js/form-validator.min.js"></script>
+    <script src="~/Assets/Client/js/contact-form-script.js"></script>
+    <script src="~/Assets/Client/js/custom.js"></script>
+</body>
+</html>

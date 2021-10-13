@@ -1,0 +1,70 @@
+﻿@model IEnumerable<CayGiong.Models.Category>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<p>
+    <button class="btn btn-primary addCate" type="button" data-toggle="modal" data-target="#modal-add">
+        <i class="fa fa-plus mr-3" style="color:#fff"></i><span>Create New</span>
+    </button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name_Cate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.url_Cate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name_Cate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.url_Cate)
+            </td>
+            <td>
+                <button class="btn btn-danger btnDel" dataid="@item.id_Cate" title="Delete" data-toggle="modal" data-target="#myModal"><i class="fa fa-tractor" style="color:#fff"></i></button>
+                <button class="btn btn-secondary btnEditCate" dataid='@item.id_Cate' title='Edit' data-toggle="modal" data-target="#modal-edit"> <i class="fa fa-edit" style="color:#fff"></i> </button>
+
+            </td>
+        </tr>
+    }
+
+</table>
+<a href="/Admin/Category/Index" class="btn btn-primary">Back to List</a>
+
+<!-- modal placeholders-->
+<div id="modal-edit" class="modal fade">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div id='modal-edit-content'></div>
+        </div>
+    </div>
+</div>
+<div id="modal-add" class=" modal fade in">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div id='modal-add-content'></div>
+        </div>
+    </div>
+</div>
+<div id="modal-delete" class=" modal fade in">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div id='modal-delete-content'></div>
+        </div>
+    </div>
+</div>
+
+
+

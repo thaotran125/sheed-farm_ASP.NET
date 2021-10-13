@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Start Slider -->
+@RenderPage("SlideHome.cshtml")
+<!-- End Slider -->
+<!-- Start Categories  -->
+<!-- End Categories -->
+<!-- Start Products  -->
+<div class="products-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-all text-center">
+                    <h1>Sản Phẩm Bán Chạy</h1>
+                    @*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>*@
+                </div>
+            </div>
+        </div>
+        <div class="row special-list">
+            @foreach (var item in ViewBag.topProduct)
+            {
+                <div class="col-lg-3 col-md-6 special-grid best-seller">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">New</p>
+                            </div>
+                            <img src="~/Images/Product/@item.img_Prodcut" class="img-fluid imgmian" alt="@item.name_product">
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="/Product/DetailProduct?idPro=@item.id_Product" data-toggle="tooltip" data-placement="right" title="View Detail"><i class="fas fa-eye"></i></a></li>
+
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                @*  <a href="/Home/AddCart?idPro=@item.id_Product" class="cart addCart" dataPro="@item.id_Product">Add To Cart</a>*@
+                                <button class="cart addCart" dataPro="@item.id_Product">Add To Cart</button>
+                                @*  @Html.ActionLink("Add To Cart", "DetailProduct", "Product",new {idPro=item.id_Product },new { @class="cart addCart", title = "View Detail" })*@
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <a href="/Product/DetailProduct?idPro=@item.id_Product"><h4>@item.name_product</h4> </a>
+                            <h5> @item.price</h5>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+<!-- End Products  -->
+<!-- Start Blog  -->
+<div class="latest-blog">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-all text-center">
+                    <h1>Sản Phẩm Mới</h1>
+                    @*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>*@
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in ViewBag.newProduct)
+            {
+                <div class="col-md-6 col-lg-4 col-xl-4">
+                    <div class="blog-box">
+                        <div class="blog-img">
+                            <a href="/Product/DetailProduct?idPro=@item.id_Product" title="@item.name_product">
+                                <img src="~/Images/Product/@item.img_Prodcut" class="img-fluid " width="350" height="350" alt="@item.name_product">
+                            </a>
+
+                        </div>
+                        <div class="blog-content">
+                            <div class="title-blog">
+                                <a href="/Product/DetailProduct?idPro=@item.id_Product"><h3>@item.name_product</h3></a> 
+                                <p class="text-truncate text-wrap " style="height: 120px;">@item.title</p>
+                            </div>
+                            <ul class="option-blog">
+                                <li><a href=""  class="cart addCart" dataPro="@item.id_Product"> <i class="fas fa-shopping-cart"></i> </a> </li>
+                                <li><a href="/Product/DetailProduct?idPro=@item.id_Product" title="View Datail"><i class="fas fa-eye"></i></a></li>
+                                <li><a href="#" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+    </div>
+</div>
+<!-- End Blog  -->
+<!-- Start Instagram Feed  -->
+<div class="instagram-box">
+    <div class="main-instagram owl-carousel owl-theme">
+        @foreach (var item in ViewBag.addproduct)
+        {
+            <div class="item">
+                <div class="ins-inner-box">
+                    <a href="/Product/DetailProduct?idPro=@item.id_Product" title="@item.name_product"> <img src="~/Images/Product/@item.img_Prodcut" class="border border-success img-instagram" alt="@item.name_product"></a>
+
+                    @*<div class="hov-in">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>*@
+                </div>
+            </div>
+
+        }
+
+       
+    </div>
+</div>
+<!-- End Instagram Feed  -->

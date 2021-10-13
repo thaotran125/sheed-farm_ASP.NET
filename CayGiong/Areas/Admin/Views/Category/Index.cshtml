@@ -1,0 +1,88 @@
+﻿@model IEnumerable<CayGiong.Models.Category>
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section header{
+    List Category
+}
+<div class="card-body row">
+    @if (ViewBag.Successmsg != null)
+    {
+        <div class="alert alert-success" id="almsg" role="alert">
+            @ViewBag.Successmsg
+        </div>
+    }
+    @if (ViewBag.Errormsg != null)
+    {
+        <div class="alert alert-danger" id="almsg" role="alert">
+            @ViewBag.Errormsg
+        </div>
+    }
+</div>
+
+<p>
+    <button class="btn btn-primary" id="addCate"  type="button" data-toggle="modal" data-target="#modal-add">
+        <i class="fa fa-plus mr-3" style="color:#fff"></i><span>Create New</span>
+    </button>
+</p>
+
+<table class="table table-striped">
+    <tr>
+        <th>STT</th>
+        <th>
+            @Html.DisplayNameFor(model => model.name_Cate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.url_Cate)
+        </th>
+        <th></th>
+    </tr>
+    @{ int i = 0;}
+    @foreach (var item in Model)
+    {
+        i++;
+        <tr>
+            <td>@i</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name_Cate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.url_Cate)
+            </td>
+            <td>
+                <a href="/Admin/CateChild/Index?id=@item.id_Cate" title="Create" class="btn btn-success"><i class="fa fa-eye" style="color:#fff"></i></a>
+                <button class="btn btn-secondary btnEditCate"  dataid='@item.id_Cate' title='Edit' data-toggle="modal" data-target="#modal-edit"> <i class="fa fa-edit" style="color:#fff"></i> </button>
+                <button class="btn btn-danger btnDel"  dataid="@item.id_Cate" title="Delete" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash" style="color:#fff"></i></button>
+              
+            </td>
+        </tr>
+    }
+</table>
+
+
+<!-- modal placeholders-->
+<div id="modal-edit" class="modal fade">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div id='modal-edit-content'></div>
+        </div>
+    </div>
+</div>
+<div id="modal-add" class=" modal fade in">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div id='modal-add-content'></div>
+        </div>
+    </div>
+</div>
+<div id="modal-delete" class=" modal fade in">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div id='modal-delete-content'></div>
+        </div>
+    </div>
+</div>
+
+
+

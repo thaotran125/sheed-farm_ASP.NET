@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="pcStoreContainer" CdmEntityContainer="pcEntities">
+    <EntitySetMapping Name="Account">
+      <EntityTypeMapping TypeName="pc.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="level" ColumnName="level" />
+          <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+          <ScalarProperty Name="remember_token" ColumnName="remember_token" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Category">
+      <EntityTypeMapping TypeName="pc.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="id_Cate" ColumnName="id_Cate" />
+          <ScalarProperty Name="name_Cate" ColumnName="name_Cate" />
+          <ScalarProperty Name="url_Cate" ColumnName="url_Cate" />
+          <ScalarProperty Name="img_Cate" ColumnName="img_Cate" />
+          <ScalarProperty Name="Group_id" ColumnName="Group_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee">
+      <EntityTypeMapping TypeName="pc.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id_card" ColumnName="id_card" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="working_day" ColumnName="working_day" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order">
+      <EntityTypeMapping TypeName="pc.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="id_Order" ColumnName="id_Order" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="id_Status" ColumnName="id_Status" />
+          <ScalarProperty Name="order_day" ColumnName="order_day" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order_detal">
+      <EntityTypeMapping TypeName="pc.Order_detal">
+        <MappingFragment StoreEntitySet="Order_detal">
+          <ScalarProperty Name="id_Order" ColumnName="id_Order" />
+          <ScalarProperty Name="id_Product" ColumnName="id_Product" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product">
+      <EntityTypeMapping TypeName="pc.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="id_Product" ColumnName="id_Product" />
+          <ScalarProperty Name="name_product" ColumnName="name_product" />
+          <ScalarProperty Name="url_Product" ColumnName="url_Product" />
+          <ScalarProperty Name="img_Prodcut" ColumnName="img_Prodcut" />
+          <ScalarProperty Name="tittle" ColumnName="tittle" />
+          <ScalarProperty Name="id_Cate" ColumnName="id_Cate" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status_Order">
+      <EntityTypeMapping TypeName="pc.Status_Order">
+        <MappingFragment StoreEntitySet="Status_Order">
+          <ScalarProperty Name="id_Status" ColumnName="id_Status" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="tittle" ColumnName="tittle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,60 @@
+﻿@model CayGiong.ViewModel.CartViewModel
+@{
+    ViewBag.Title = "AfterPayment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="imgaftePay">
+    <img src="~/Images/img/check.jpg" />
+    <h2>Đặt hàng thành công</h2>
+    <span>Cảm ơn bạn đã mua hàng tại Seed Farm </span>
+</div>
+<pre class="inforPay">
+    Mã đơn hàng:                @ViewBag.idOrder  <br>
+    Thời gian:                  @ViewBag.Day_Order   <br>
+    Giá trị đơn hàng:           @ViewBag.total   <br>
+</pre>
+<hr>
+<h4 class="ml-5">Chi Tiết Đơn Hàng </h4>
+<div>
+    <table class="table ml-3">
+        <thead>
+            <tr>
+                <th>Images</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.listcart)
+            {
+                <tr>
+                    <td class="thumbnail-img">
+                        <a href="#">
+                            <img src="~/Images/Product/@item.product.img_Prodcut" alt="" width="70"/>
+                        </a>
+                    </td>
+                    <td class="name-pr">
+                        <a href="#">
+                            @item.product.name_product
+                        </a>
+                    </td>
+                    <td class="price-pr">
+                            <p>@item.product.price VND</p>
+                        </td>
+                    <td >
+                            <input type="number" inputmode="numeric" size="4"  readonly class="cssnumber" value="@item.Quantity">
+                    </td>
+                    <td class="total-pr">
+                        <p>@string.Format("{0:n0}", item.product.price * item.Quantity) VDN</p>
+                    </td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+</div>
+

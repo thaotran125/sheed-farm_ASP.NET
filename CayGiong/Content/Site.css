@@ -1,0 +1,73 @@
+﻿body {
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+
+.NavHead{
+    margin-bottom:46px;
+}
+
+.myhead {
+    background-color: #007bff !important;
+    margin-bottom: 46px !important;
+}
+
+.myhead .nav-link{
+    color: white !important;
+   
+}
+
+.rowcart{
+    padding-left:0 !important;
+    padding-right:0 !important;
+    margin-bottom:24px !important;
+}
+
+img .imgmian {
+    height: 200px !important;
+    width: 80%;
+    margin: auto;
+}
+
+.rowcart .price{
+    color:red;
+    font-weight:600;
+}
+
+.rowcart .card-footer-link{
+    margin:auto;
+}
+
+.rowcart .card-footer{
+    justify-content:center;
+    display:flex;
+}
+
+a .addCart:hover{
+    background-color:darkorange;
+
+}
+
+.btn-primary:hover {
+    background-color: darkorange !important;
+}
+
+.card-title{
+    color: blue;
+    font-weight:bold;
+}
+
+

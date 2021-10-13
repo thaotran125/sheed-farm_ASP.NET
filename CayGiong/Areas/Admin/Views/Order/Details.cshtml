@@ -1,0 +1,44 @@
+﻿@model IEnumerable<CayGiong.Models.Order_detal>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Chi tiết đơn hàng của @ViewBag.NameCus
+}
+
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.name_product)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>Total</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.name_product)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+               @string.Format("{0:n0}", item.price)
+            </td>
+            <td> @string.Format("{0:n0}",item.price*item.quantity)</td>
+        </tr>
+    }
+
+</table>
+<a class="btn btn-primary" href="/Admin/Order/Index">go to List order</a>

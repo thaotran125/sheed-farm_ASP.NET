@@ -1,0 +1,26 @@
+﻿<div class="side">
+    <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+    <div class="cart-box">
+        @if (ViewBag.ListCart != null)
+        {
+            <ul class="cart-list">
+                @foreach (var item in ViewBag.ListCart)
+                {
+                    <li>
+                        <a href="#" class="photo"><img src="~/Images/Product/@item.product.img_Prodcut" class="cart-thumb" alt="@item.product.name_product" /></a>
+                        <h6><a href="#">@item.product.name_product </a></h6>
+                        <p>@item.Quantity  <span class="price">@item.product.price VND</span></p>
+                    </li>
+                }
+            </ul>
+        }
+        @if (ViewBag.ListCart == null)
+        {
+            <div class="emptyCart">
+                <div class="cart-list cart-bottom">
+                    <a href="/Product/Index" class="btn btn-primary">Tiếp Tục Mua Hàng</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

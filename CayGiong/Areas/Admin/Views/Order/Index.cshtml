@@ -1,0 +1,111 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<CayGiong.Models.OrderProduct>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    List Order
+}
+<div class="card-body">
+    <div class="row">
+        @if (ViewBag.Successmsg != null)
+        {
+            <div class="alert alert-success" id="almsg" role="alert">
+                @ViewBag.Successmsg
+            </div>
+        }
+        @if (ViewBag.Errormsg != null)
+        {
+            <div class="alert alert-danger" id="almsg" role="alert">
+                @ViewBag.Errormsg
+            </div>
+        }
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>Id</th>
+        <th>
+            Name
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Note
+        </th>
+        <th>
+            Total
+        </th>
+        <th>
+           day order
+        </th>
+        <th>
+           Status Order
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_Order)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.note)
+            </td>
+            <td>
+                @string.Format("{0:n0}", item.total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.order_day)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status_Order.name)
+            </td>
+            <td>
+                <a href="/Admin/Order/Details?id=@item.id_Order" class=" btn btn-success"><i class="fa fa-eye"></i></a>
+                <button class="btn btn-primary btnEditOrder" type="button" title="Edit" dataid="@item.id_Order" ><i class="fa fa-edit"></i></button>
+            </td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+<div id="modal-edit" class="modal fade">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div id='modal-edit-content'></div>
+        </div>
+    </div>
+</div>
+
+@{
+    TempData["page"] = Model.PageNumber;
+} 
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="168109c4999245eab9f54977954848a0" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_SEED_FARMModel.Account" Width="1.5" PointX="8" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SEED_FARMModel.Category" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SEED_FARMModel.Employee" Width="1.5" PointX="5.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SEED_FARMModel.Order_detal" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SEED_FARMModel.OrderProduct" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SEED_FARMModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SEED_FARMModel.Status_Order" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="DB_SEED_FARMModel.fk_kh_acc" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SEED_FARMModel.fk_sp_loai" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SEED_FARMModel.fk_ct_dh" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SEED_FARMModel.fk_ct_sp" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SEED_FARMModel.fk_dh_tt" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

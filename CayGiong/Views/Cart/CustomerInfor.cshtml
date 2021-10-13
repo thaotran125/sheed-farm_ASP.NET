@@ -1,0 +1,79 @@
+﻿@model CayGiong.ViewModel.CustomerViewModel
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Start Cart  -->
+<div class="cart-box-main">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-6 col-lg-6 mb-3">
+                <div class="checkout-address">
+                    <div class="title-left">
+                        <h3>Thông Tin Người Nhận Hàng</h3>
+                    </div>
+                    @using (Html.BeginForm("CustomerInfor", "Cart", FormMethod.Post, new { @class = "needs-validation" }))
+                    {
+                        <div class="mb-3">
+                            <label for="username">Họ Tên *</label>
+                            <div class="input-group">
+                                @Html.TextBoxFor(x => x.name, new { @class = "form-control", required = "", placeholder = "Nhập tên của bạn" })
+
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email">Số Điện Thoại *</label>
+                            @Html.TextBoxFor(x => x.phone, new { @class = "form-control", required = "", placeholder = "Nhập số điện thoại của bạn" })
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="mail">Email *</label>
+                            @Html.TextBoxFor(x => x.mail, new { @class = "form-control", Type= "email", required = "", placeholder = "Nhập mail của bạn" })
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="address">Địa Chỉ Nhận Hàng *</label>
+                            @Html.TextBoxFor(x => x.address, new { @class = "form-control", required = "", placeholder = "Nhập địa chỉ của bạn" })
+                        </div>
+                        <div class="col-12 d-flex shopping-box">
+                            @*@Html.ActionLink("Tiếp Tục", "PayMentConti", "Cart", new { @class = "ml-auto btn hvr-hover" })*@
+                            <button type="submit" class = "btn hvr-hover" >Tiếp Tục</button>
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-6 mb-3">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="shipping-method-box">
+                            <div class="title-left">
+                                <h3>Phương Thức Vận Chuyển</h3>
+                            </div>
+                            <div class="mb-4">
+                                <div class="custom-control custom-radio">
+                                    <input id="shippingOption1" name="shipping-option" class="custom-control-input" checked="checked" type="radio">
+                                    <label class="custom-control-label" for="shippingOption1">Giao hàng tiêu chuẩn</label> <span class="float-right font-weight-bold">0 đ</span>
+                                </div>
+                                <div class="ml-4 mb-2 small">(3-7 ngày làm việc)</div>
+                                <div class="custom-control custom-radio">
+                                    <input id="shippingOption2" name="shipping-option" class="custom-control-input" type="radio">
+                                    <label class="custom-control-label" for="shippingOption2">Chuyển phát nhanh</label> <span class="float-right font-weight-bold">30.000 VNĐ</span>
+                                </div>
+                                <div class="ml-4 mb-2 small">(2-4 ngày làm việc)</div>
+                                <div class="custom-control custom-radio">
+                                    <input id="shippingOption3" name="shipping-option" class="custom-control-input" type="radio">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- End Cart -->

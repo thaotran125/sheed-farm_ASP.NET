@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="pc" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="pcEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Account" EntityType="pc.Account" />
+    <EntitySet Name="Category" EntityType="pc.Category" />
+    <EntitySet Name="Employee" EntityType="pc.Employee" />
+    <EntitySet Name="Order" EntityType="pc.Order" />
+    <EntitySet Name="Order_detal" EntityType="pc.Order_detal" />
+    <EntitySet Name="Product" EntityType="pc.Product" />
+    <EntitySet Name="Status_Order" EntityType="pc.Status_Order" />
+    <AssociationSet Name="fk_kh_acc" Association="pc.fk_kh_acc">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="fk_sp_loai" Association="pc.fk_sp_loai">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="fk_ct_dh" Association="pc.fk_ct_dh">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="Order_detal" EntitySet="Order_detal" />
+    </AssociationSet>
+    <AssociationSet Name="fk_dh_tt" Association="pc.fk_dh_tt">
+      <End Role="Status_Order" EntitySet="Status_Order" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="fk_ct_sp" Association="pc.fk_ct_sp">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Order_detal" EntitySet="Order_detal" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="userName" />
+    </Key>
+    <Property Name="userName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="level" Type="Int32" Nullable="false" />
+    <Property Name="id_employee" Type="Int32" Nullable="false" />
+    <Property Name="remember_token" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Employee" Relationship="pc.fk_kh_acc" FromRole="Account" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="id_Cate" />
+    </Key>
+    <Property Name="id_Cate" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name_Cate" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="url_Cate" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="img_Cate" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Group_id" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="pc.fk_sp_loai" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="id_employee" />
+    </Key>
+    <Property Name="id_employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="id_card" Type="String" Nullable="false" MaxLength="12" Unicode="false" FixedLength="false" />
+    <Property Name="phone" Type="String" Nullable="false" MaxLength="12" Unicode="false" FixedLength="false" />
+    <Property Name="address" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="working_day" Type="DateTime" Nullable="false" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Account" Relationship="pc.fk_kh_acc" FromRole="Employee" ToRole="Account" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="id_Order" />
+    </Key>
+    <Property Name="id_Order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="phone" Type="String" Nullable="false" MaxLength="12" Unicode="false" FixedLength="false" />
+    <Property Name="address" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="note" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="id_Status" Type="Int32" />
+    <Property Name="order_day" Type="DateTime" />
+    <NavigationProperty Name="Order_detal" Relationship="pc.fk_ct_dh" FromRole="Order" ToRole="Order_detal" />
+    <NavigationProperty Name="Status_Order" Relationship="pc.fk_dh_tt" FromRole="Order" ToRole="Status_Order" />
+  </EntityType>
+  <EntityType Name="Order_detal">
+    <Key>
+      <PropertyRef Name="id_Order" />
+      <PropertyRef Name="id_Product" />
+    </Key>
+    <Property Name="id_Order" Type="Int32" Nullable="false" />
+    <Property Name="id_Product" Type="Int32" Nullable="false" />
+    <Property Name="quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="pc.fk_ct_dh" FromRole="Order_detal" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="pc.fk_ct_sp" FromRole="Order_detal" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="id_Product" />
+    </Key>
+    <Property Name="id_Product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name_product" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="url_Product" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="img_Prodcut" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="tittle" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="id_Cate" Type="Int32" Nullable="false" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Category" Relationship="pc.fk_sp_loai" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Order_detal" Relationship="pc.fk_ct_sp" FromRole="Product" ToRole="Order_detal" />
+  </EntityType>
+  <EntityType Name="Status_Order">
+    <Key>
+      <PropertyRef Name="id_Status" />
+    </Key>
+    <Property Name="id_Status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="tittle" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Order" Relationship="pc.fk_dh_tt" FromRole="Status_Order" ToRole="Order" />
+  </EntityType>
+  <Association Name="fk_kh_acc">
+    <End Role="Employee" Type="pc.Employee" Multiplicity="1" />
+    <End Role="Account" Type="pc.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="id_employee" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="id_employee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_sp_loai">
+    <End Role="Category" Type="pc.Category" Multiplicity="1" />
+    <End Role="Product" Type="pc.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="id_Cate" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="id_Cate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_ct_dh">
+    <End Role="Order" Type="pc.Order" Multiplicity="1" />
+    <End Role="Order_detal" Type="pc.Order_detal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="id_Order" />
+      </Principal>
+      <Dependent Role="Order_detal">
+        <PropertyRef Name="id_Order" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_dh_tt">
+    <End Role="Status_Order" Type="pc.Status_Order" Multiplicity="0..1" />
+    <End Role="Order" Type="pc.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status_Order">
+        <PropertyRef Name="id_Status" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="id_Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_ct_sp">
+    <End Role="Product" Type="pc.Product" Multiplicity="1" />
+    <End Role="Order_detal" Type="pc.Order_detal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id_Product" />
+      </Principal>
+      <Dependent Role="Order_detal">
+        <PropertyRef Name="id_Product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

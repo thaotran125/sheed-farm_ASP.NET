@@ -1,0 +1,130 @@
+﻿@using CayGiong.Dao
+@{
+    DaoCategory dao = new DaoCategory();
+}
+@{
+    Layout = null;
+}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav" style="max-height:76px">
+    <div class="container">
+        <!-- Start Header Navigation -->
+        <div class="navbar-header">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand" href="/Home/Index"><img src="~/Images/img/logo.jpg" class="logo" alt=""></a>
+        </div>
+        <!-- End Header Navigation -->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-menu">
+            <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                <li class="nav-item active">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+
+                <li class="nav-item dropdown" id="myDropdown">
+                    <a class="nav-link " href="#" data-bs-toggle="dropdown"> Danh Muc <i class="ti-angle-down"></i></a>
+                    <ul class="dropdown-menu">
+                        @{
+                            foreach (var item in ViewBag.listParent)
+                            {
+
+                                if (dao.CountCateGroup(item.id_Cate) != 0)
+                                {
+                                    <li>
+                                        <a class="dropdown-item" data-idParent="@item.Group_id" href="/Product/ProductParent?idParent=@item.id_Cate"> @item.name_Cate </a>
+                                        <ul class="submenu dropdown-menu">
+
+                                            @foreach (var sub in ViewBag.listGroup)
+                                            {
+                                                if (item.id_Cate == sub.Group_id)
+                                                {
+                                                    <li><a class="dropdown-item" href="/Product/ProductChild?idChild=@sub.id_Cate">@sub.name_Cate</a></li>
+                                                }
+
+                                            }
+
+                                        </ul>
+
+                                    </li>
+                                }
+                                if (dao.CountCateGroup(item.id_Cate) == 0)
+                                {
+                                    <li><a class="dropdown-item" data-idParent="@item.Group_id" href="/Product/ProductParent?idParent=@item.id_Cate"> @item.name_Cate </a></li>
+
+                                }
+                            }
+                        }
+                    </ul>
+
+                </li>
+                <li class="nav-item"><a class="nav-link" href="/Product/Index">Product</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+        <!-- Start Atribute Navigation -->
+        <div class="attr-nav">
+            <ul>
+                <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                <li style=" display: inline-block;">
+                    <a id="nav_cart" href="/Cart/Index">
+                        <i class="fa fa-shopping-bag"></i>
+                        <span class="badge" id="QuantityMycart">@ViewBag.QuantityCart</span>
+                        <p style=" display: inline-block;">My Cart</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- End Atribute Navigation -->
+    </div>
+    <!-- Start Side Menu -->
+
+
+
+    <div class="side">
+        <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+        <div class="cart-box">
+            @if (ViewBag.check == 1)
+            {
+                <ul class="cart-list">
+                    <li>
+                        <a href="#" class="photo"><img src="~/images/product/bo.jpg" class="cart-thumb" alt="" /></a>
+                        <h6><a href="#">delica omtantur </a></h6>
+                        <p>1x - <span class="price">$80.00</span></p>
+                    </li>
+                    <li>
+                        <a href="#" class="photo"><img src="~/images/product/hat-giong-bi.jpg" class="cart-thumb" alt="" /></a>
+                        <h6><a href="#">omnes ocurreret</a></h6>
+                        <p>1x - <span class="price">$60.00</span></p>
+                    </li>
+                    <li>
+                        <a href="#" class="photo"><img src="~/images/product/keo-cat-tia.jpg" class="cart-thumb" alt="" /></a>
+                        <h6><a href="#">agam facilisis</a></h6>
+                        <p>1x - <span class="price">$40.00</span></p>
+                    </li>
+                    <li class="total">
+                        <a href="/cart/index" class="btn btn-default hvr-hover btn-cart">view cart</a>
+                        <span class="float-right"><strong>total</strong>: $180.00</span>
+                    </li>
+                </ul>
+            }
+            @if (ViewBag.check == 0)
+            {
+                <div class="css-container">
+                    <div class="card-body css-content">
+                        <div class="css-labEmp">
+                            <h6>Giỏ hàng chưa có sản phẩm nào</h6>
+                            <a href="/Product/Index" class="btn btn-success">Mua Sắm ngay</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+
+
+    <!-- End Side Menu -->
+</nav>
+

@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_SEED_FARMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="userName" />
+    </Key>
+    <Property Name="userName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="level" Type="int" Nullable="false" />
+    <Property Name="id_employee" Type="int" Nullable="false" />
+    <Property Name="remember_token" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="id_Cate" />
+    </Key>
+    <Property Name="id_Cate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name_Cate" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="url_Cate" Type="nvarchar" MaxLength="200" />
+    <Property Name="img_Cate" Type="varchar" MaxLength="100" />
+    <Property Name="Group_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="id_employee" />
+    </Key>
+    <Property Name="id_employee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="id_card" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="phone" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="working_day" Type="date" Nullable="false" />
+    <Property Name="status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order_detal">
+    <Key>
+      <PropertyRef Name="id_Order" />
+      <PropertyRef Name="id_Product" />
+    </Key>
+    <Property Name="id_Order" Type="int" Nullable="false" />
+    <Property Name="id_Product" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="int" Nullable="false" />
+    <Property Name="price" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="OrderProduct">
+    <Key>
+      <PropertyRef Name="id_Order" />
+    </Key>
+    <Property Name="id_Order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="phone" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="address" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="note" Type="nvarchar" MaxLength="255" />
+    <Property Name="total" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="id_Status" Type="int" />
+    <Property Name="order_day" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="id_Product" />
+    </Key>
+    <Property Name="id_Product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name_product" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="url_Product" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="img_Prodcut" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="id_Cate" Type="int" Nullable="false" />
+    <Property Name="price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="status" Type="int" />
+    <Property Name="descript" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Status_Order">
+    <Key>
+      <PropertyRef Name="id_Status" />
+    </Key>
+    <Property Name="id_Status" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="fk_ct_dh">
+    <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="1" />
+    <End Role="Order_detal" Type="Self.Order_detal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderProduct">
+        <PropertyRef Name="id_Order" />
+      </Principal>
+      <Dependent Role="Order_detal">
+        <PropertyRef Name="id_Order" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_ct_sp">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Order_detal" Type="Self.Order_detal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id_Product" />
+      </Principal>
+      <Dependent Role="Order_detal">
+        <PropertyRef Name="id_Product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_dh_tt">
+    <End Role="Status_Order" Type="Self.Status_Order" Multiplicity="0..1" />
+    <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status_Order">
+        <PropertyRef Name="id_Status" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="id_Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_kh_acc">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="id_employee" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="id_employee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_sp_loai">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="id_Cate" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="id_Cate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="CheckDel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getCateParent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="PR_Login_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="useName" Type="varchar" Mode="In" />
+    <Parameter Name="pass" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="pr_RpTurnover" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="pr_RpTurnoverWithDay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="pr_RpTurnoverWithMonth" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="PRgetIdParent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idCate" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="DB_SEED_FARMModelStoreContainer">
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order_detal" EntityType="Self.Order_detal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderProduct" EntityType="Self.OrderProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status_Order" EntityType="Self.Status_Order" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_ct_dh" Association="Self.fk_ct_dh">
+      <End Role="OrderProduct" EntitySet="OrderProduct" />
+      <End Role="Order_detal" EntitySet="Order_detal" />
+    </AssociationSet>
+    <AssociationSet Name="fk_ct_sp" Association="Self.fk_ct_sp">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Order_detal" EntitySet="Order_detal" />
+    </AssociationSet>
+    <AssociationSet Name="fk_dh_tt" Association="Self.fk_dh_tt">
+      <End Role="Status_Order" EntitySet="Status_Order" />
+      <End Role="OrderProduct" EntitySet="OrderProduct" />
+    </AssociationSet>
+    <AssociationSet Name="fk_kh_acc" Association="Self.fk_kh_acc">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="fk_sp_loai" Association="Self.fk_sp_loai">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

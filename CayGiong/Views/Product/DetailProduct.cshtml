@@ -1,0 +1,105 @@
+﻿@model CayGiong.Models.Product
+@{
+    ViewBag.Title = "DetailProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Product Detail</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/Product/Index">Product</a></li>
+                    <li class="breadcrumb-item active">Detail </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Start Shop Detail  -->
+<div class="shop-detail-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-lg-5 col-md-6">
+                <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active"> <img class="d-block w-100" src="~/Images/Product/@Model.img_Prodcut" alt="First slide"> </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-7 col-lg-7 col-md-6">
+                <div class="single-product-details">
+                    <h2>@Model.name_product</h2>
+                    <h5> <del>$ 60.00</del> @Model.price VND</h5>
+                    <p class="available-stock"><span> More than 20 available / <a href="#">8 sold </a></span><p>
+                        <h4>Chi Tiết Sản Phẩm</h4>
+                    <p>@Model.title</p>
+                    <ul>
+                        <li>
+                            <div class="form-group quantity-box">
+
+                                <div class="quantity-box quantity-detail">
+                                    <label class="control-label" style="padding-right:12px">Số Lượng:</label>
+                                    <div class="div-quantity">
+                                        <button class="btn-minus" id="minus-detail" ><span class="sp-minus">-</span></button>
+                                        <input type="number" inputmode="numeric" size="4"  value="1" min="0" step="1" class="cssnumber" id="quantity-detail">
+                                        <button class="btn-plus" id="plus-datail"><span class="sp-plus">+</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="price-box-bar">
+                        <div class="cart-and-bay-btn">
+                            <a class="hvr-hover BuyNow"  href="/Cart/BuyNow?idPro=@Model.id_Product"  >Buy New</a>
+                            <a href="" class="hvr-hover cartDetail"  dataPro="@Model.id_Product"><i class="fas fa-shopping-cart"></i> Add To Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        @if (ViewBag.Count != 0)
+        {
+            <div class="row my-5">
+                <div class="col-lg-12">
+                    <div class="title-all text-center">
+                        <h1>Sản Phẩm Tương Tự</h1>
+                    </div>
+                    <div class="featured-products-box owl-carousel owl-theme">
+                        @foreach (var item in ViewBag.relateProduct)
+                        {
+                            <div class="item">
+                                <div class="products-single fix">
+                                    <div class="box-img-hover">
+                                        <img src="~/Images/Product/@item.img_Prodcut" class="img-fluid img-product" alt="@item.name_product">
+                                        <div class="mask-icon">
+                                            <ul>
+                                                <li><a href="/Product/DetailProduct?idPro=@item.id_Product" data-toggle="tooltip" data-placement="right" title="View Detail"><i class="fas fa-eye"></i></a></li>
+                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                            </ul>
+                                            <button class="cart addCart" dataPro="@item.id_Product">Add To Cart</button>
+                                        </div>
+                                    </div>
+                                    <div class="why-text">
+                                        <a href="/Product/DetailProduct?idPro=@item.id_Product"><h4>@item.name_product</h4> </a>
+                                        <h5> @item.price</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+</div>
+<!-- End Card -->
